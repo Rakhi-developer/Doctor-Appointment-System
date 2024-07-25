@@ -3,21 +3,21 @@ const colors = require("colors");
 const moragan = require("morgan");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const path=require("path")
+const path = require("path");
+//rest object
+const app = express();
 // const userRouters = require("./routes/userRouters.js");
 dotenv.config();
 
 // static files
-app.use(express.static(path.join(__dirname,'./client/build')))
-app.get('*',function (req,res) {
-  res.sendFile(path.join(__dirname,'./client/build/server.js'))
-})
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/server.js"));
+});
 
 //mongodb connection
 connectDB();
 
-//rest object
-const app = express();
 //middleware
 app.use(express.json());
 app.use(moragan("dev"));
